@@ -1,0 +1,1468 @@
+{
+  "freecad_version": "1.1.3",
+  "freecad_build": "20260725 (Git shallow)",
+  "step_file": "C:\\Users\\AjayG\\Desktop\\Waste Paper Bin\\dbmsfifth\\dbms-EL-5th-sem\\data\\demo\\winch_100.step",
+  "root_label": "WINCH-100",
+  "placed_solids": 73,
+  "leaf_features": 73,
+  "distinct_volumes": 18,
+  "total_volume_mm3": 2511528.2544383667,
+  "invalid_or_open": 0,
+  "leaf_labels": [
+    "BASE-PLATE",
+    "BEARING-BLOCK",
+    "BEARING-BLOCK001",
+    "BOLT-M6X001",
+    "BOLT-M6X002",
+    "BOLT-M6X003",
+    "BOLT-M6X004",
+    "BOLT-M6X005",
+    "BOLT-M6X006",
+    "BOLT-M6X007",
+    "BOLT-M6X008",
+    "BOLT-M6X009",
+    "BOLT-M6X010",
+    "BOLT-M6X011",
+    "BOLT-M6X012",
+    "BOLT-M6X013",
+    "BOLT-M6X014",
+    "BOLT-M6X015",
+    "BOLT-M6X016",
+    "BOLT-M6X017",
+    "BOLT-M6X018",
+    "BOLT-M6X019",
+    "BOLT-M6X020",
+    "BOLT-M6X021",
+    "BOLT-M6X022",
+    "BOLT-M6X023",
+    "BOLT-M6X024",
+    "BOLT-M6X025",
+    "BOLT-M6X026",
+    "BOLT-M6X20",
+    "BOLT-M6X32",
+    "CONTROL-ENCLOSURE",
+    "CONTROL-PCB",
+    "DRUM",
+    "DRUM-FLANGE",
+    "DRUM-FLANGE001",
+    "GEARBOX-COVER",
+    "GEARBOX-HOUSING",
+    "MOTOR",
+    "MOTOR-BRACKET-RH",
+    "NUT-M001",
+    "NUT-M002",
+    "NUT-M003",
+    "NUT-M004",
+    "NUT-M005",
+    "NUT-M006",
+    "NUT-M007",
+    "NUT-M008",
+    "NUT-M6",
+    "OUTPUT-PINION",
+    "PLATE-A",
+    "PLATE-B",
+    "SHAFT",
+    "SPACER-20",
+    "WASHER-M001",
+    "WASHER-M002",
+    "WASHER-M003",
+    "WASHER-M004",
+    "WASHER-M005",
+    "WASHER-M006",
+    "WASHER-M007",
+    "WASHER-M008",
+    "WASHER-M009",
+    "WASHER-M010",
+    "WASHER-M011",
+    "WASHER-M012",
+    "WASHER-M013",
+    "WASHER-M014",
+    "WASHER-M015",
+    "WASHER-M016",
+    "WASHER-M017",
+    "WASHER-M018",
+    "WASHER-M6"
+  ],
+  "objects": [
+    {
+      "label": "BASE-PLATE",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 956715.6533762317,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        956715.6534
+      ]
+    },
+    {
+      "label": "BEARING-BLOCK",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 164712.50792707063,
+      "placement": [
+        40.0,
+        110.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        164712.5079
+      ]
+    },
+    {
+      "label": "BEARING-BLOCK001",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 164712.50792707063,
+      "placement": [
+        240.0,
+        110.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        164712.5079
+      ]
+    },
+    {
+      "label": "SHAFT",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 226194.67105846514,
+      "placement": [
+        -100.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        226194.6711
+      ]
+    },
+    {
+      "label": "DRUM",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 153767.13738554795,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        153767.1374
+      ]
+    },
+    {
+      "label": "DRUM-FLANGE",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 16522.264083760136,
+      "placement": [
+        -10.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        16522.2641
+      ]
+    },
+    {
+      "label": "DRUM-FLANGE001",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 16522.264083760136,
+      "placement": [
+        110.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        16522.2641
+      ]
+    },
+    {
+      "label": "BOLT-M6X20",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900804,
+      "placement": [
+        -14.0,
+        18.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X001",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900804,
+      "placement": [
+        -14.0,
+        0.0,
+        18.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X002",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900804,
+      "placement": [
+        -14.0,
+        -18.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X003",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        -14.0,
+        -0.0,
+        -18.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "DRUM-ASSY",
+      "type": "App::Part",
+      "n_solids": 8,
+      "volume": 416603.46019990335,
+      "placement": [
+        112.0,
+        150.0,
+        38.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        226194.6711,
+        153767.1374,
+        16522.2641,
+        16522.2641,
+        899.2809,
+        899.2809,
+        899.2809,
+        899.2809
+      ]
+    },
+    {
+      "label": "MOTOR-BRACKET-RH",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 86747.18685056966,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        86747.1869
+      ]
+    },
+    {
+      "label": "MOTOR",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 145254.67793137956,
+      "placement": [
+        45.0,
+        70.0,
+        34.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        145254.6779
+      ]
+    },
+    {
+      "label": "GEARBOX-HOUSING",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 255415.18329070738,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        255415.1833
+      ]
+    },
+    {
+      "label": "GEARBOX-COVER",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 69305.217792077,
+      "placement": [
+        0.0,
+        0.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        69305.2178
+      ]
+    },
+    {
+      "label": "OUTPUT-PINION",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 44896.24928504043,
+      "placement": [
+        55.0,
+        20.0,
+        40.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        44896.2493
+      ]
+    },
+    {
+      "label": "BOLT-M6X004",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        12.0,
+        12.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M6",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625817,
+      "placement": [
+        12.0,
+        12.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X005",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900802,
+      "placement": [
+        98.0,
+        12.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M001",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625817,
+      "placement": [
+        98.0,
+        12.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X006",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        12.0,
+        68.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M002",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625817,
+      "placement": [
+        12.0,
+        68.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X007",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        98.0,
+        68.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M003",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625817,
+      "placement": [
+        98.0,
+        68.0,
+        70.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "GEARBOX",
+      "type": "App::Part",
+      "n_solids": 11,
+      "volume": 373857.37319357035,
+      "placement": [
+        100.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        255415.1833,
+        69305.2178,
+        44896.2493,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X008",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        15.0,
+        15.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M004",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        15.0,
+        15.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X009",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        75.0,
+        15.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M005",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        75.0,
+        15.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X010",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900804,
+      "placement": [
+        15.0,
+        50.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M006",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        15.0,
+        50.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "DRIVE-ASSY",
+      "type": "App::Part",
+      "n_solids": 19,
+      "volume": 609039.7800948314,
+      "placement": [
+        140.0,
+        5.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        86747.1869,
+        145254.6779,
+        255415.1833,
+        69305.2178,
+        44896.2493,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998
+      ]
+    },
+    {
+      "label": "PLATE-A",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 6994.728336014435,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        6994.7283
+      ]
+    },
+    {
+      "label": "SPACER-20",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 1618.548535129497,
+      "placement": [
+        20.0,
+        15.0,
+        6.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        1618.5485
+      ]
+    },
+    {
+      "label": "PLATE-B",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 6994.728336014435,
+      "placement": [
+        0.0,
+        0.0,
+        26.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        6994.7283
+      ]
+    },
+    {
+      "label": "BOLT-M6X32",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 1238.5729036777757,
+      "placement": [
+        20.0,
+        15.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        1238.5729
+      ]
+    },
+    {
+      "label": "NUT-M6",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.98005716412945,
+      "placement": [
+        20.0,
+        15.0,
+        32.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "CLAMP-STACK",
+      "type": "App::Part",
+      "n_solids": 5,
+      "volume": 17215.558168000327,
+      "placement": [
+        330.0,
+        200.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        6994.7283,
+        1618.5485,
+        6994.7283,
+        1238.5729,
+        368.9801
+      ]
+    },
+    {
+      "label": "CONTROL-ENCLOSURE",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 152115.76112004835,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        152115.7611
+      ]
+    },
+    {
+      "label": "CONTROL-PCB",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 11141.893102279204,
+      "placement": [
+        10.0,
+        10.0,
+        6.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        11141.8931
+      ]
+    },
+    {
+      "label": "BOLT-M6X011",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        10.0,
+        10.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X012",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        110.0,
+        10.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X013",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        10.0,
+        80.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X014",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        110.0,
+        80.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "CONTROL-BOX",
+      "type": "App::Part",
+      "n_solids": 6,
+      "volume": 166854.77781068813,
+      "placement": [
+        60.0,
+        200.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        152115.7611,
+        11141.8931,
+        899.2809,
+        899.2809,
+        899.2809,
+        899.2809
+      ]
+    },
+    {
+      "label": "BOLT-M6X015",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        50.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M007",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625848,
+      "placement": [
+        50.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M001",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641295,
+      "placement": [
+        50.0,
+        120.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X016",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        90.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M008",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625842,
+      "placement": [
+        90.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M002",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641295,
+      "placement": [
+        90.0,
+        120.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X017",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900802,
+      "placement": [
+        50.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M009",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625837,
+      "placement": [
+        50.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M003",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641294,
+      "placement": [
+        50.0,
+        180.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X018",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900801,
+      "placement": [
+        90.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M010",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        90.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M004",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.98005716412933,
+      "placement": [
+        90.0,
+        180.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X019",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        250.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M011",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.8998093462585,
+      "placement": [
+        250.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M005",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641295,
+      "placement": [
+        250.0,
+        120.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X020",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900807,
+      "placement": [
+        290.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M012",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625842,
+      "placement": [
+        290.0,
+        120.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M006",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641293,
+      "placement": [
+        290.0,
+        120.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X021",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900802,
+      "placement": [
+        250.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M013",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.8998093462584,
+      "placement": [
+        250.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M007",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641294,
+      "placement": [
+        250.0,
+        180.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X022",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900804,
+      "placement": [
+        290.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M014",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        290.0,
+        180.0,
+        53.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "NUT-M008",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 368.9800571641292,
+      "placement": [
+        290.0,
+        180.0,
+        -5.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        368.9801
+      ]
+    },
+    {
+      "label": "BOLT-M6X023",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900803,
+      "placement": [
+        20.0,
+        20.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M015",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625834,
+      "placement": [
+        20.0,
+        20.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X024",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900808,
+      "placement": [
+        380.0,
+        20.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M016",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625837,
+      "placement": [
+        380.0,
+        20.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X025",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900808,
+      "placement": [
+        20.0,
+        280.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M017",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625854,
+      "placement": [
+        20.0,
+        280.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "BOLT-M6X026",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 899.2808970900811,
+      "placement": [
+        380.0,
+        280.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        899.2809
+      ]
+    },
+    {
+      "label": "WASHER-M018",
+      "type": "Part::Feature",
+      "n_solids": 1,
+      "volume": 160.89980934625856,
+      "placement": [
+        380.0,
+        280.0,
+        8.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        160.8998
+      ]
+    },
+    {
+      "label": "WINCH-100",
+      "type": "App::Part",
+      "n_solids": 73,
+      "volume": 2511528.2544383667,
+      "placement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "valid": true,
+      "closed": true,
+      "solid_volumes": [
+        956715.6534,
+        164712.5079,
+        164712.5079,
+        226194.6711,
+        153767.1374,
+        16522.2641,
+        16522.2641,
+        899.2809,
+        899.2809,
+        899.2809,
+        899.2809,
+        86747.1869,
+        145254.6779,
+        255415.1833,
+        69305.2178,
+        44896.2493,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        6994.7283,
+        1618.5485,
+        6994.7283,
+        1238.5729,
+        368.9801,
+        152115.7611,
+        11141.8931,
+        899.2809,
+        899.2809,
+        899.2809,
+        899.2809,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        368.9801,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998,
+        899.2809,
+        160.8998
+      ]
+    }
+  ]
+}

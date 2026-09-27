@@ -1,0 +1,30 @@
+# Interlock. Versions are the ones this was built and tested against.
+# Python 3.10. SQLite comes from the standard library.
+
+# --- geometry kernel (ingest only; no query opens a solid) ---
+# Open CASCADE, the kernel FreeCAD wraps. The design document names FreeCAD
+# 1.1.3; this binds to OCCT directly because FreeCAD is not installed here.
+cadquery-ocp==7.9.3.1.1
+
+# --- numerics ---
+numpy==2.2.6
+scipy==1.15.3          # SVD/Kabsch and the Hungarian assignment in socket matching
+
+# --- document store (the narrow, justified half of the polyglot split) ---
+tinydb==4.9.0          # falls back to a stdlib JSON-lines store if absent
+
+# --- review interface ---
+fastapi==0.136.3
+uvicorn==0.32.0
+Jinja2==3.1.6
+python-multipart==0.0.27   # form posts on /ask
+
+# --- optional natural-language layer ---
+# Absent or unkeyed, the layer degrades to an offline keyword router over the
+# same typed tools, so the demonstration never needs a network.
+anthropic==1.7.0
+python-dotenv==1.0.1
+
+# --- tests ---
+pytest==9.0.3
+httpx==0.28.1          # fastapi.testclient

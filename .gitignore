@@ -1,0 +1,72 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---- Environments ----
+.venv/
+venv/
+env/
+.conda/
+
+# ---- Secrets / credentials ----
+# Nothing sensitive is expected in this project, but fail safe.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.json
+credentials.json
+service-account*.json
+.anthropic
+anthropic_api_key*
+*_token.txt
+.aws/
+.netrc
+
+# ---- Generated databases & blobs ----
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+data/store/
+data/cache/
+data/blobs/
+
+# Generated demonstration payloads. The assembly is built from source by
+# interlock/synthetic/ and rebuilt by `python -m interlock.cli demo`, which is
+# what docs/LICENCES.md says happens -- so the STEP files and the render are
+# build output, not sources, and do not belong in the history.
+data/demo/*
+!data/demo/.gitkeep
+
+# ---- Generated / downloaded CAD payloads ----
+# Third-party CAD is redistributed under its own licence; see docs/LICENCES.md.
+data/external/
+*.stp.large
+*.FCStd1
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Logs & scratch ----
+*.log
+scratch/
+tmp/

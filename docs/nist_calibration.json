@@ -1,0 +1,657 @@
+{
+  "cases": {
+    "ctc_01": {
+      "203-geo": {
+        "file": "nist_ctc_01_asme1_rd.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.12
+      },
+      "203-pmi": {
+        "file": "nist_ctc_01_asme1_ap203.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.14
+      },
+      "242-e1": {
+        "file": "nist_ctc_01_asme1_ap242-e1.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.11
+      }
+    },
+    "ctc_02": {
+      "203-geo": {
+        "file": "nist_ctc_02_asme1_rc.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.73
+      },
+      "203-pmi": {
+        "file": "nist_ctc_02_asme1_ap203.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.63
+      },
+      "242-e2": {
+        "file": "nist_ctc_02_asme1_ap242-e2.stp",
+        "solids": 4,
+        "identified": 1,
+        "read_s": 0.79
+      }
+    },
+    "ctc_03": {
+      "203-geo": {
+        "file": "nist_ctc_03_asme1_rc.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.11
+      },
+      "203-pmi": {
+        "file": "nist_ctc_03_asme1_ap203.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.16
+      },
+      "242-e2": {
+        "file": "nist_ctc_03_asme1_ap242-e2.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.11
+      }
+    },
+    "ctc_04": {
+      "203-geo": {
+        "file": "nist_ctc_04_asme1_rd.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.4
+      },
+      "203-pmi": {
+        "file": "nist_ctc_04_asme1_ap203.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.32
+      },
+      "242-e1": {
+        "file": "nist_ctc_04_asme1_ap242-e1.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.43
+      }
+    },
+    "ctc_05": {
+      "203-geo": {
+        "file": "nist_ctc_05_asme1_rd.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.19
+      },
+      "203-pmi": {
+        "file": "nist_ctc_05_asme1_ap203.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.16
+      },
+      "242-e1": {
+        "file": "nist_ctc_05_asme1_ap242-e1.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.17
+      }
+    },
+    "ftc_06": {
+      "203-geo": {
+        "file": "nist_ftc_06_asme1_rd.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.11
+      },
+      "242-e2": {
+        "file": "nist_ftc_06_asme1_ap242-e2.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.19
+      }
+    },
+    "ftc_07": {
+      "203-geo": {
+        "file": "nist_ftc_07_asme1_rd.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.21
+      },
+      "242-e2": {
+        "file": "nist_ftc_07_asme1_ap242-e2.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.35
+      }
+    },
+    "ftc_08": {
+      "203-geo": {
+        "file": "nist_ftc_08_asme1_rc.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.22
+      },
+      "242-e2": {
+        "file": "nist_ftc_08_asme1_ap242-e2.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.31
+      }
+    },
+    "ftc_09": {
+      "203-geo": {
+        "file": "nist_ftc_09_asme1_rd.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.16
+      },
+      "242-e1": {
+        "file": "nist_ftc_09_asme1_ap242-e1.stp",
+        "solids": 4,
+        "identified": 1,
+        "read_s": 0.29
+      }
+    },
+    "ftc_10": {
+      "203-geo": {
+        "file": "nist_ftc_10_asme1_rb.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.19
+      },
+      "242-e2": {
+        "file": "nist_ftc_10_asme1_ap242-e2.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.51
+      }
+    },
+    "ftc_11": {
+      "203-geo": {
+        "file": "nist_ftc_11_asme1_rb.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.01
+      },
+      "242-e2": {
+        "file": "nist_ftc_11_asme1_ap242-e2.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.08
+      }
+    },
+    "stc_06": {
+      "242-e3": {
+        "file": "nist_stc_06_asme1_ap242-e3.stp",
+        "solids": 1,
+        "identified": 1,
+        "read_s": 0.15
+      }
+    },
+    "stc_07": {
+      "242-e3": {
+        "file": "nist_stc_07_asme1_ap242-e3.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.35
+      }
+    },
+    "stc_08": {
+      "242-e3": {
+        "file": "nist_stc_08_asme1_ap242-e3.stp",
+        "solids": 3,
+        "identified": 1,
+        "read_s": 0.26
+      }
+    },
+    "stc_09": {
+      "242-e3": {
+        "file": "nist_stc_09_asme1_ap242-e3.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.29
+      }
+    },
+    "stc_10": {
+      "242-e2": {
+        "file": "nist_stc_10_asme1_ap242-e2.stp",
+        "solids": 2,
+        "identified": 1,
+        "read_s": 0.32
+      }
+    }
+  },
+  "pairs": [
+    {
+      "case": "ctc_01",
+      "a": "203-geo",
+      "b": "203-pmi",
+      "same_strict": true,
+      "char_length_error": 0.0,
+      "dimensionless_error": 0.0,
+      "chirality": [
+        -1,
+        -1
+      ],
+      "topology_agrees": true,
+      "histogram_agrees": true,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_01",
+      "a": "203-geo",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 4.4768117743940895e-05,
+      "dimensionless_error": 0.0004261744704103232,
+      "chirality": [
+        -1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_01",
+      "a": "203-pmi",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 4.4768117743940895e-05,
+      "dimensionless_error": 0.0004261744704103232,
+      "chirality": [
+        -1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_02",
+      "a": "203-geo",
+      "b": "203-pmi",
+      "same_strict": false,
+      "char_length_error": 7.892175775501379e-07,
+      "dimensionless_error": 7.580476388935331e-06,
+      "chirality": [
+        1,
+        1
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_02",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 3.341854578516547e-05,
+      "dimensionless_error": 0.0001417774709046027,
+      "chirality": [
+        1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_02",
+      "a": "203-pmi",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 3.420773698821186e-05,
+      "dimensionless_error": 0.00014092958780020926,
+      "chirality": [
+        1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_03",
+      "a": "203-geo",
+      "b": "203-pmi",
+      "same_strict": true,
+      "char_length_error": 0.0,
+      "dimensionless_error": 0.0,
+      "chirality": [
+        -1,
+        -1
+      ],
+      "topology_agrees": true,
+      "histogram_agrees": true,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_03",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 0.00018616383259750812,
+      "dimensionless_error": 0.002692951456300108,
+      "chirality": [
+        -1,
+        1
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_03",
+      "a": "203-pmi",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 0.00018616383259750812,
+      "dimensionless_error": 0.002692951456300108,
+      "chirality": [
+        -1,
+        1
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_04",
+      "a": "203-geo",
+      "b": "203-pmi",
+      "same_strict": false,
+      "char_length_error": 3.6534356721288712e-06,
+      "dimensionless_error": 1.4572497671672124e-05,
+      "chirality": [
+        1,
+        1
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_04",
+      "a": "203-geo",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 1.0544029559694425e-05,
+      "dimensionless_error": 0.00017907047135928833,
+      "chirality": [
+        1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_04",
+      "a": "203-pmi",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 1.4197426709889575e-05,
+      "dimensionless_error": 0.00019364296903096045,
+      "chirality": [
+        1,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_05",
+      "a": "203-geo",
+      "b": "203-pmi",
+      "same_strict": false,
+      "char_length_error": 2.8924049001801427e-07,
+      "dimensionless_error": 8.77326778336851e-07,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_05",
+      "a": "203-geo",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 1.0692987955589814e-06,
+      "dimensionless_error": 1.0692545978630008e-06,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ctc_05",
+      "a": "203-pmi",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 7.800585311654791e-07,
+      "dimensionless_error": 7.396302733053695e-07,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": true,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_06",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 2.9461698410462667e-06,
+      "dimensionless_error": 5.4100011018798355e-06,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_07",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 1.4067542551026894e-07,
+      "dimensionless_error": 2.8816924135810495e-06,
+      "chirality": [
+        1,
+        1
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_08",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 2.7809269918178443e-05,
+      "dimensionless_error": 5.6324521191086774e-05,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_09",
+      "a": "203-geo",
+      "b": "242-e1",
+      "same_strict": false,
+      "char_length_error": 9.90347448187081e-10,
+      "dimensionless_error": 3.005065923034067e-05,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": true,
+      "histogram_agrees": true,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_10",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 1.2927290192557926e-05,
+      "dimensionless_error": 8.815143827789473e-05,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    },
+    {
+      "case": "ftc_11",
+      "a": "203-geo",
+      "b": "242-e2",
+      "same_strict": false,
+      "char_length_error": 0.00035662029737655853,
+      "dimensionless_error": 0.0019483117950342965,
+      "chirality": [
+        0,
+        0
+      ],
+      "topology_agrees": false,
+      "histogram_agrees": false,
+      "solids": [
+        1,
+        1
+      ]
+    }
+  ],
+  "problems": [
+    "ctc_01 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_01 203-pmi 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_01 242-e1 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 203-geo 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 203-pmi 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 242-e2 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 242-e2 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_02 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_03 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_03 203-pmi 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_03 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_04 203-geo 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_04 203-pmi 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_04 203-pmi 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_04 242-e1 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_04 242-e1 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_05 203-geo 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (-3.05609e-11)']",
+    "ctc_05 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ctc_05 203-pmi 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_06 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_06 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_07 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (-9.23251e-15)']",
+    "ftc_07 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_08 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_09 203-geo 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_09 242-e1 '': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_09 242-e1 '': ['no closed solid in shape; mass properties are undefined']",
+    "ftc_09 242-e1 '': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "ftc_10 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (-101.324)']",
+    "ftc_10 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "stc_07 242-e3 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "stc_07 242-e3 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (-9.23251e-15)']",
+    "stc_08 242-e3 'SHELL': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "stc_08 242-e3 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "stc_09 242-e3 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']",
+    "stc_10 242-e2 'COMPOUND': ['no closed solid in shape; mass properties are undefined', 'non-positive volume (0)']"
+  ],
+  "summary": {
+    "pairs": 21,
+    "strict_agree": 2,
+    "size_error_p50": 1.0544029559694425e-05,
+    "size_error_p95": 0.00018616383259750812,
+    "size_error_max": 0.00035662029737655853,
+    "shape_error_p50": 5.6324521191086774e-05,
+    "shape_error_p95": 0.002692951456300108,
+    "shape_error_max": 0.002692951456300108
+  }
+}
