@@ -26,7 +26,7 @@ DFDs are drawn in levels, zooming in each time:
                       Named as verb + object ("Validate change").
   Rectangle           External entity: a person or system OUTSIDE ours
                       that sends or receives data.
-  Two parallel lines  Data store: data at rest (our tables), numbered D1-D8.
+  Two parallel lines  Data store: data at rest (our tables), D1 to D7.
   Arrow with a label  Data flow: data moving. The label names the data,
                       not an action.
 
@@ -37,6 +37,8 @@ Rules followed:
   - BALANCING: the flows to and from external entities are the SAME at
     every level. Level 0 shows "change request" from the Design Engineer,
     so Level 1 and Level 2 show it too, now entering a specific process.
+  - drawn with straight lines at right angles and no crossing lines, so
+    every flow can be followed by eye
 
 ======================================================================
 3. LEVEL 0: CONTEXT DIAGRAM
@@ -53,92 +55,90 @@ external entities:
                     breaks something they depend on; sends back an
                     acknowledgement
   Language Model    for plain-English questions: receives the question
-  Service           and the list of tools; sends back which tool to call
-                    and the answer text
+  Service           and tool results; sends back which tool to call and
+                    the answer text
 
 ======================================================================
 4. LEVEL 1: THE SIX MAIN PROCESSES
 ======================================================================
  1.0 Ingest geometry
-     Reads the STEP file, computes the geometric fingerprint and finds
-     holes and faces. Checks D1 for a shape it already knows (the same
-     shape is stored only once). Passes the analysis to 2.0.
+     Reads the STEP file from the CAD tool, computes the geometric
+     fingerprint and finds holes and faces. Stores new shapes in D1
+     (the same shape is stored only once) and passes the analysis to 2.0.
 
  2.0 Validate and land change   (the heart of the system; see Level 2)
-     Takes the change request + geometry analysis, checks it against
-     contracts (D3), the current configuration (D2), shapes (D1) and
-     tolerance chains (D4). Either lands it whole or rejects it whole.
-     Records the commit and every check in D5, writes events to D7,
-     sends breaking changes to 3.0 and the verdict to the engineer.
+     Takes the change request + geometry analysis, checks it against the
+     current configuration (D2), shapes (D1), and contracts and tolerance
+     chains (D3). Either lands it whole or rejects it whole. Writes new
+     revisions to D2, the commit record to D4 and trace events to the
+     outbox D6; sends breaking changes to 3.0 and the verdict to the
+     engineer.
 
  3.0 Notify affected teams
-     Looks up who subscribed to the changed part (D6), stores a
+     Looks up who subscribed to the changed part (D5), stores the
      notification, tells the team, and records their acknowledgement.
 
  4.0 Sync document store
-     Takes pending events from the Outbox (D7), writes them as JSON
-     documents to the NoSQL store (D8), and marks them delivered. This
-     happens only AFTER the SQL commit, so a rejected change never leaves
-     a stray document.
+     Takes pending events from the Outbox (D6) and writes them as JSON
+     documents to the NoSQL store (D7). This happens only AFTER the SQL
+     commit, so a rejected change never leaves a stray document.
 
  5.0 Answer queries and reports
      Bill of materials, where-used, impact, tolerance chains, project
-     status, interference, history. Reads D1-D6 and D8. For plain-English
+     status, history. Reads D2, D3, D4 and D7. For plain-English
      questions it asks the Language Model which read-only tool to use.
 
  6.0 Export geometry
      Rebuilds a part or assembly as a STEP file from stored geometry (D1)
-     and structure (D2), and sends it to the CAD tool.
+     and sends it to the CAD tool.
 
 The data stores (each is a group of tables from the ER diagram):
-  D1 Geometry                  shape, shape_alias, feature (+ geometry files)
+  D1 Geometry                  shape, shape_alias, feature
   D2 Parts and assemblies      team, part, revision, occurrence, ref
-  D3 Contracts                 contract, interface, socket
-  D4 Tolerances                dimension, chain, chain_member
-  D5 Commit history            commit_log, validation, change_classification
-  D6 Subscriptions and
-     notifications             subscription, notification
-  D7 Outbox                    outbox
-  D8 Document store (NoSQL)    validation traces, notification detail,
+  D3 Contracts and tolerances  contract, interface, socket, dimension,
+                               chain, chain_member
+  D4 Commit history            commit_log, validation, change_classification
+  D5 Notifications             subscription, notification
+  D6 Outbox                    outbox
+  D7 Document store (NoSQL)    validation traces, notification detail,
                                question log (TinyDB JSON)
-  (interference results belong with D2's configuration and are written by
-   5.0 when a clash check is run)
 
 ======================================================================
 5. LEVEL 2: INSIDE 2.0 VALIDATE AND LAND CHANGE
 ======================================================================
-The checks run cheapest first, so a doomed change is rejected before the
-expensive checks run. Each passes its result to the next; any failure
-goes straight to 2.7.
+The change moves left to right through the checks, cheapest first. Each
+check adds its result and passes the change on; "check results" (pass
+or fail for every check) arrive at 2.7. A failed check means the later
+checks have nothing to add, which is why a doomed change never pays for
+the expensive ones.
 
  2.1 Check concurrency
      Was the change written against the CURRENT version of the assembly?
-     Compares the request's base root hash with the one in D2. If someone
-     else landed a change first: "failed check" (prevents lost updates).
+     Compares the request's base root with the current root in D2. If
+     someone else landed a change first, it fails (prevents lost updates).
  2.2 Check declaration, write proposed state
-     Every change must declare its contract (or inherit the previous one
-     from D3). Writes the new revisions into D2 INSIDE a transaction, so
-     the remaining checks test exactly what would land.
+     Every change must declare its contract (or inherit the old one from
+     D3). Uses the geometry analysis from 1.0. Writes the proposed state
+     INSIDE a transaction, so the remaining checks test exactly what
+     would land.
  2.3 Classify change
-     Compares the new contract hash with the old one (D3): no_op,
-     internal (nothing others depend on changed) or breaking. This only
-     labels the change; it cannot fail.
+     no_op, internal (nothing others depend on changed) or breaking.
+     This only labels the change; it cannot fail.
  2.4 Check envelope and budgets
      Does the part still fit its size envelope and stay under its mass
-     limit? Uses volume and bounding box (D1) and limits (D3).
+     limit? Uses size and mass data from D1.
  2.5 Match sockets to interfaces
      Do the bolt holes still line up with what the parent assembly
-     expects? Uses hole features (D1), interfaces and sockets (D3) and
-     placements (D2). This is the check that catches a moved hole.
+     expects? Uses interfaces and sockets from D3. This is the check that
+     catches a moved hole.
  2.6 Re-total tolerance chains
-     Adds up every affected tolerance chain (D4) and checks it against
-     its limits.
+     Adds up every affected tolerance chain (D3) against its limits.
  2.7 Land or roll back
-     All passed: swap the ref in D2 to the new root (the change "lands"),
-     send breaking changes to 3.0.
+     All passed: swap the ref in D2 to the new root (the change "lands")
+     and send breaking changes to 3.0.
      Any failed: roll back everything 2.2 wrote.
-     Either way: record the commit and every check in D5, put a trace
-     event in D7, and return the verdict and reason to the engineer.
+     Either way: record the commit in D4, put a trace event in the outbox
+     D6, and return the verdict and reason to the engineer.
 
 ======================================================================
 6. VIVA POINTS
@@ -149,7 +149,7 @@ goes straight to 2.7.
 - Balancing: show that "change request" and "verdict and reason" appear
   at Levels 0, 1 and 2, with the same external entity.
 - Numbering: 2.1 to 2.7 are the children of process 2.0.
-- Why the outbox (D7) sits between SQL and NoSQL: two databases can't
+- Why the outbox (D6) sits between SQL and NoSQL: two databases can't
   share one transaction, so documents are written only after the SQL
   commit succeeds.
 - A data store connects only to processes, never directly to an
