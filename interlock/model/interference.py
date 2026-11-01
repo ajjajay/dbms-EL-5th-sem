@@ -62,9 +62,17 @@ class Clash:
                 f"{self.path_a} and {self.path_b} overlap by {self.volume:.1f} mm^3 "
                 f"({self.part_a}, team {self.team_a} / {self.part_b}, team {self.team_b})"
             )
+        # `depth` is the boxes' overlap on their tightest axis: negative is a
+        # gap between the boxes, positive is how far the boxes interpenetrate.
+        # A positive value says nothing about the solids, which may still be apart.
+        if self.depth < 0:
+            return (
+                f"{self.path_a} and {self.path_b} are within the clearance limit "
+                f"({-self.depth:.2f} mm apart)"
+            )
         return (
-            f"{self.path_a} and {self.path_b} are within the clearance limit "
-            f"({self.depth:.2f} mm apart)"
+            f"{self.path_a} and {self.path_b}: bounding boxes overlap by {self.depth:.2f} mm; "
+            f"the solids were not tested exactly"
         )
 
 
@@ -79,10 +87,13 @@ class Report:
     exact: bool = True
 
     def summary(self) -> str:
+        clashes = sum(c.kind == "clash" for c in self.clashes)
+        flagged = len(self.clashes) - clashes
         return (
             f"{self.pairs_considered} pairs considered, "
             f"{self.pairs_after_prefilter} survived the bounding-box prefilter, "
-            f"{self.exact_tests} exact tests, {len(self.clashes)} clash(es) found"
+            f"{self.exact_tests} exact tests, {clashes} clash(es) found"
+            + (f", {flagged} pair(s) flagged by bounding box only" if flagged else "")
         )
 
 

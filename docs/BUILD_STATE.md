@@ -1,16 +1,16 @@
 # Interlock — build state
 
 Spec: `C:\Users\AjayG\Desktop\Waste Paper Bin\TEDX\Video\Interlock.pdf` (17 sections).
-Last updated: 2026-11-01 (status view added; build complete).
+Last updated: 2026-11-01 (status view, projects and a real product added; build complete).
 
 **Status: complete.** Every section of the design document is implemented,
-including the optional Stage Five. 178 tests pass. The full write-up is
+including the optional Stage Five. 186 tests pass. The full write-up is
 `docs/REPORT.md`; the tolerance measurement is `docs/CALIBRATION.md`.
 
 ```
 .venv/Scripts/python.exe -m interlock.cli demo     # build + walk all five stages (~1 min)
 .venv/Scripts/python.exe -m interlock.cli serve    # review interface
-.venv/Scripts/python.exe -m pytest tests -q        # 178 tests, ~2 min
+.venv/Scripts/python.exe -m pytest tests -q        # 186 tests, ~2 min
 ```
 
 ---
@@ -93,8 +93,8 @@ including the optional Stage Five. 178 tests pass. The full write-up is
 | `nl/tools.py, agent.py` | 12 read-only typed tools; `claude-opus-5` loop; offline router |
 | `web/app.py` | Review interface, 16 routes + JSON API |
 | `synthetic/` | CAD toolkit, WINCH-100 assembly, bootstrap |
-| `cli.py` | 16 subcommands |
-| `tests/` | 178 tests across 7 files |
+| `cli.py` | 18 subcommands, `--project` |
+| `tests/` | 186 tests across 8 files |
 
 ---
 
@@ -164,6 +164,20 @@ limitations that remain are inherent and are listed in `docs/REPORT.md` §11
 (the status view) has since been built; see below.
 
 ---
+
+## Built 2026-11-01: projects, and a real product
+
+`interlock/projects.py`: a project is its own folder (`data/projects/<name>/`)
+with its own database, blobs, document store and downloaded sources; every CLI
+command takes `--project`. `build-project NAME` downloads a real product and
+builds it, wiring in `contracts.auto_draft` (which existed but was never called)
+to draft an unreviewed contract for every part. First real product:
+**SO-ARM100** robot arm (Apache-2.0), follower and leader assemblies. Findings,
+including one identity false negative caused by tessellation, are in
+`docs/LICENCES.md`. Two defects found by the real data and fixed: fast-mode
+interference described overlapping boxes as a distance apart, and long part names
+broke the `bom` / `status` columns. `run.sh` runs any project with one command.
+Tests in `tests/test_projects.py`.
 
 ## Built 2026-11-01: the status view (was "Wanted next")
 

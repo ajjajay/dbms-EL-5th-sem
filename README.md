@@ -18,12 +18,43 @@ DBMS Elective Lab, 5th semester. Full write-up: **[`docs/REPORT.md`](docs/REPORT
 .venv/Scripts/python.exe -m interlock.cli serve        # http://127.0.0.1:8000
 
 # 3. the tests
-.venv/Scripts/python.exe -m pytest tests -q            # 178 tests, ~2 min
+.venv/Scripts/python.exe -m pytest tests -q            # 186 tests, ~2 min
 ```
 
 `demo` takes about a minute. It generates a 20-part assembly as STEP, ingests it,
 authors every contract, then runs the five stages of the design document's
 section 16 — printing what each one proves.
+
+## One command, and projects
+
+```bash
+./run.sh                       # demonstration: demo, status, web interface (Ctrl+C stops)
+./run.sh --project so-arm100   # a real product, built from its published CAD on first use
+./run.sh --serve               # skip the build, serve what is there
+./run.sh --list                # the projects and whether each is built
+./run.sh --stop                # stop a review server left running
+```
+
+A **project** is a separate database for a separate product, in
+`data/projects/<name>/` with its own blobs, document store and downloaded
+sources. Every CLI command takes `--project NAME`; without it, commands work on
+the demonstration assembly (`winch`, in `data/store/`).
+
+| Project | What it is |
+|---|---|
+| `winch` | The generated WINCH-100 demonstration assembly (`demo`) |
+| `so-arm100` | The open-source SO-ARM100 robot arm, follower and leader assemblies, Apache-2.0 ([source and findings](docs/LICENCES.md)) |
+
+```bash
+python -m interlock.cli build-project so-arm100        # download (13 MB) and build
+python -m interlock.cli --project so-arm100 status     # every auto-drafted contract is outstanding work
+python -m interlock.cli --project so-arm100 interference
+python -m interlock.cli --project so-arm100 --ref leader tree   # the leader arm
+```
+
+A real download carries geometry and names only, so `build-project` drafts a
+contract for every part from its own geometry and stores it as auto-drafted and
+unreviewed. The status view then reports each one as work still to do.
 
 ## What `demo` shows
 

@@ -69,7 +69,7 @@ stages that the document does not have and that turned out to be necessary.
 | `web/app.py` | 510 | Review interface |
 | `synthetic/` | 1 000 | Demonstration assembly generator |
 | `cli.py` | 620 | Command line |
-| `tests/` | 1 100 | 178 tests |
+| `tests/` | 1 100 | 186 tests |
 
 About 9 800 lines of implementation and 1 100 of tests.
 
@@ -78,7 +78,7 @@ About 9 800 lines of implementation and 1 100 of tests.
 ```
 .venv/Scripts/python.exe -m interlock.cli demo     # build everything, walk five stages
 .venv/Scripts/python.exe -m interlock.cli serve    # the review interface
-.venv/Scripts/python.exe -m pytest tests -q        # 178 tests
+.venv/Scripts/python.exe -m pytest tests -q        # 186 tests
 ```
 
 ---
@@ -606,7 +606,7 @@ nodes times fan-out.
 
 ## 11. What is proven, and what is not
 
-**Proven, by tests that re-run** (`pytest tests -q`, 178 tests):
+**Proven, by tests that re-run** (`pytest tests -q`, 186 tests):
 
 - Mesh moments match the kernel's own mass properties to 1e-6; third moments
   vanish for a symmetric body and flip sign under mirroring
@@ -733,5 +733,5 @@ interlock/
 scripts/       calibrate_nist.py               the calibration run
 docs/          REPORT.md CALIBRATION.md        this file; the measurement
                LICENCES.md BUILD_STATE.md
-tests/         178 tests
+tests/         186 tests
 ```

@@ -45,6 +45,8 @@ anthropic_api_key*
 data/store/
 data/cache/
 data/blobs/
+# Each project's database, blobs and downloaded third-party CAD (see docs/LICENCES.md).
+data/projects/
 
 # Generated demonstration payloads. The assembly is built from source by
 # interlock/synthetic/ and rebuilt by `python -m interlock.cli demo`, which is

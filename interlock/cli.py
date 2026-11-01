@@ -17,6 +17,11 @@
     python -m interlock.cli drain         deliver the outbox to the document store
     python -m interlock.cli stats         row counts and storage
     python -m interlock.cli status        what is finished, what is outstanding, whose turn
+    python -m interlock.cli projects      list the projects and whether each is built
+    python -m interlock.cli build-project NAME   download a real product and build its database
+
+Every command takes --project NAME to work on that project's own database
+(default: the demonstration assembly, 'winch').
 """
 
 from __future__ import annotations
@@ -29,6 +34,7 @@ from pathlib import Path
 from .db.database import DEFAULT_DB, Database
 from .db.documents import drain as drain_outbox
 from .db.documents import open_document_store, pending_count
+from . import projects as proj
 from .model import interference as interf
 from .model import merkle, tolerance
 from .query import readiness as rd
@@ -397,12 +403,13 @@ def cmd_bom(args) -> int:
     root = args.revision or _head(db, args.ref)["revision_id"]
     rows = q.bill_of_materials(db, root)
     total = 0.0
-    print(f"{'PART':<24}{'TEAM':<14}{'QTY':>5}{'UNIT g':>11}{'TOTAL g':>11}")
+    w = max([24] + [len(r["part_number"]) + 2 for r in rows])
+    print(f"{'PART':<{w}}{'TEAM':<14}{'QTY':>5}{'UNIT g':>11}{'TOTAL g':>11}")
     for r in rows:
         total += r["total_mass_g"] or 0
-        print(f"{r['part_number']:<24}{r['team_id']:<14}{r['total_qty']:>5}"
+        print(f"{r['part_number']:<{w}}{r['team_id']:<14}{r['total_qty']:>5}"
               f"{(r['unit_mass_g'] or 0):>11.1f}{(r['total_mass_g'] or 0):>11.1f}")
-    print(f"{'':<24}{'':<14}{'':>5}{'':>11}{total:>11.1f}")
+    print(f"{'':<{w}}{'':<14}{'':>5}{'':>11}{total:>11.1f}")
     return 0
 
 
@@ -560,6 +567,7 @@ def cmd_status(args) -> int:
     print(f"{r.root_part}: {r.complete:.0%} of {len(r.parts)} distinct parts fully declared, "
           f"{len(r.waiting)} item(s) waiting on a person"
           + ("   [ready]" if r.ready else ""))
+    width = max([22] + [len(p.part_number) + 2 for p in r.parts])
     for t in r.teams.values():
         if args.team and t.team_id != args.team:
             continue
@@ -568,9 +576,42 @@ def cmd_status(args) -> int:
         for designer, parts in t.designers().items():
             print(f"  {designer}")
             for p in parts:
-                print(f"    {p.part_number:<22}{'; '.join(p.gaps)}")
+                print(f"    {p.part_number:<{width}}{'; '.join(p.gaps)}")
         for w in t.waiting:
             print(f"  {w.kind:<13}{w.detail[:150]}")
+    return 0
+
+
+def cmd_projects(args) -> int:
+    for name in proj.names():
+        path = proj.db_path(name)
+        if path.exists():
+            db = Database(path)
+            s = db.stats()
+            refs = ", ".join(r["ref_name"] for r in db.query("SELECT ref_name FROM ref ORDER BY ref_name"))
+            db.close()
+            state = f"{s['parts']} parts, {s['shapes']} shapes, refs: {refs or 'none'}"
+        else:
+            state = "not built"
+        title = proj.PROJECTS[name].title if name in proj.PROJECTS else "demonstration assembly (WINCH-100)"
+        print(f"  {name:<12} {title:<44} {state}")
+        if name in proj.PROJECTS:
+            spec = proj.PROJECTS[name]
+            print(f"  {'':<12} {spec.licence}, {spec.origin}")
+    return 0
+
+
+def cmd_build_project(args) -> int:
+    if args.name == proj.DEMO:
+        sys.exit("the demonstration project is built by `demo`")
+    if args.name not in proj.PROJECTS:
+        sys.exit(f"unknown project {args.name!r}; known: {', '.join(proj.names())}")
+    report = proj.build(args.name, refresh=args.refresh)
+    for line in report.lines:
+        print(line)
+    for p in report.problems:
+        print(f"  warning: {p}")
+    print(f"built {proj.db_path(args.name)}")
     return 0
 
 
@@ -593,6 +634,7 @@ def build_parser() -> argparse.ArgumentParser:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--db", default=str(DEFAULT_DB), help="database path")
     p.add_argument("--ref", default="main", help="which ref to read")
+    p.add_argument("--project", help=f"work on this project's database ({', '.join(proj.names())})")
     sub = p.add_subparsers(dest="command", required=True)
 
     d = sub.add_parser("demo", help="build the demo database and run the five stages")
@@ -690,6 +732,14 @@ def build_parser() -> argparse.ArgumentParser:
     ss.add_argument("--fast", action="store_true", help="skip re-running the socket checks")
     ss.set_defaults(func=cmd_status)
 
+    pj = sub.add_parser("projects", help="list the projects and whether each is built")
+    pj.set_defaults(func=cmd_projects)
+
+    bp = sub.add_parser("build-project", help="download a real product and build its database")
+    bp.add_argument("name")
+    bp.add_argument("--refresh", action="store_true", help="download the sources again")
+    bp.set_defaults(func=cmd_build_project)
+
     s = sub.add_parser("serve", help="the review interface")
     s.add_argument("--host", default="127.0.0.1")
     s.add_argument("--port", type=int, default=8000)
@@ -699,6 +749,12 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.project:
+        if args.project not in proj.names():
+            sys.exit(f"unknown project {args.project!r}; known: {', '.join(proj.names())}")
+        if args.command == "demo" and args.project != proj.DEMO:
+            sys.exit(f"`demo` builds the demonstration assembly; use `build-project {args.project}`")
+        args.db = str(proj.db_path(args.project))
     return args.func(args)
 
 

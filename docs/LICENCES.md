@@ -28,6 +28,40 @@ Only the STEP files were read. The `NIST-MTC-Assembly.zip` archive contains
 native NX and SolidWorks parts, which OCCT cannot open and which this project
 does not use.
 
+### SO-ARM100 robot arm: downloaded, used as a real product (project `so-arm100`)
+
+| | |
+|---|---|
+| Source | TheRobotStudio, `github.com/TheRobotStudio/SO-ARM100`, pinned to commit `a758567` |
+| Files | `STEP/SO100/Follower_Specific/SO_5DOF_ARM100_Assembly.step` (7.0 MB) and `STEP/SO100/Leader_Specific/SO_5DOF_ARM100_Assembly.step` (6.3 MB) |
+| Licence | Apache License 2.0, read from the repository's own `LICENSE` file, which is downloaded alongside the STEP files |
+| Retrieved | 2026-11-01 |
+| Stored at | `data/projects/so-arm100/source/`: **gitignored, not redistributed**. `python -m interlock.cli build-project so-arm100` downloads it again |
+| Used for | A real, separately exported product loaded as its own project: identity across two exports of one design, auto-drafted contracts, the status view, interference on real geometry |
+
+Teams and materials in this project are **notional**: the source declares
+neither. Printed parts are given solid PLA density (an upper bound, since prints
+are partly hollow); the servos are bought in and are given none.
+
+What the real data showed (2026-11-01):
+
+- **Identity across exports.** The leader arm, exported separately from the
+  follower, re-used 9 of its 12 shapes: 2 exact and 7 within the
+  NIST-calibrated tolerance. Two of the three new shapes are leader-only parts.
+- **One false negative.** `Wrist_Roll_Pitch_08i` is the same part in both
+  exports: the kernel's exact volumes agree to 1.5e-6. But the two exports were
+  tessellated differently (12 064 vs 12 180 triangles), which moved the
+  mesh-derived invariants by about 0.2% and flipped the chirality sign. Identity
+  kept them apart, stored as two revisions of the same part. That is the safe
+  direction (nothing was wrongly merged) and an instance of the limitation in
+  REPORT.md section 11: the fingerprint is not a proof of identity.
+- **Interference.** The exact check finds 11 overlaps in the designer's own
+  CAD, mostly printed parts against the servo models (largest 283 mm^3).
+  Reported as advisory, as designed.
+- **Defects found and fixed.** `interference --fast` described overlapping
+  bounding boxes as a distance apart and counted them as clashes; real nested
+  parts exposed it. Long real part names broke the `bom` and `status` columns.
+
 ## Data that is generated, not downloaded
 
 The demonstration assembly (**WINCH-100**, 20 distinct parts, four notional
@@ -56,6 +90,7 @@ these were downloaded.
 | **ABC Dataset** (NYU) | Copyright remains with the creators; governed by Onshape's Terms of Use, which were not read | ~1 M single parts with no assemblies; dedup at scale is not what this project is short of, and the licence position was not established |
 | **Prusa CORE One** | Prusa Open Community License: learning and modification permitted, derivatives share-alike, no selling machines or remixes, and it forbids AI data mining | The AI-data-mining clause is at best ambiguous for a project with a language-model layer, and the download is large |
 | **OpenArm hardware** | CERN-OHL-S (per a third-party summary that was not verified at source) | Not needed once the synthetic assembly covered the demonstration; the licence was never confirmed from the primary source |
+| **NIST MTC assembly** | Unrestricted (NIST) | Published only as native NX and SolidWorks files, which OCCT cannot read |
 
 ## Software
 
