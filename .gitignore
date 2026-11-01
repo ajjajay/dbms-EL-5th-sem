@@ -70,3 +70,10 @@ desktop.ini
 *.log
 scratch/
 tmp/
+
+# ---- Documents (kept on the documentation branch, not the code branch) ----
+submission/
+old_drafts/
+*.odt
+*.docx
+*.pdf

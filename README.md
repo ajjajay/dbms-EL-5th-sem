@@ -18,7 +18,7 @@ DBMS Elective Lab, 5th semester. Full write-up: **[`docs/REPORT.md`](docs/REPORT
 .venv/Scripts/python.exe -m interlock.cli serve        # http://127.0.0.1:8000
 
 # 3. the tests
-.venv/Scripts/python.exe -m pytest tests -q            # 164 tests, ~2 min
+.venv/Scripts/python.exe -m pytest tests -q            # 178 tests, ~2 min
 ```
 
 `demo` takes about a minute. It generates a 20-part assembly as STEP, ingests it,

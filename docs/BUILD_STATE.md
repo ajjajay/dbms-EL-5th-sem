@@ -1,16 +1,16 @@
 # Interlock — build state
 
 Spec: `C:\Users\AjayG\Desktop\Waste Paper Bin\TEDX\Video\Interlock.pdf` (17 sections).
-Last updated: 2026-09-21 (build complete).
+Last updated: 2026-11-01 (status view added; build complete).
 
 **Status: complete.** Every section of the design document is implemented,
-including the optional Stage Five. 164 tests pass. The full write-up is
+including the optional Stage Five. 178 tests pass. The full write-up is
 `docs/REPORT.md`; the tolerance measurement is `docs/CALIBRATION.md`.
 
 ```
 .venv/Scripts/python.exe -m interlock.cli demo     # build + walk all five stages (~1 min)
 .venv/Scripts/python.exe -m interlock.cli serve    # review interface
-.venv/Scripts/python.exe -m pytest tests -q        # 164 tests, ~2 min
+.venv/Scripts/python.exe -m pytest tests -q        # 178 tests, ~2 min
 ```
 
 ---
@@ -91,10 +91,10 @@ including the optional Stage Five. 164 tests pass. The full write-up is
 | `model/interference.py` | Prefilter + exact, advisory |
 | `query/traversal.py` | Explosion, BOM, where-used, impact, substitution, rollups, config walk |
 | `nl/tools.py, agent.py` | 12 read-only typed tools; `claude-opus-5` loop; offline router |
-| `web/app.py` | Review interface, 14 routes + JSON API |
+| `web/app.py` | Review interface, 16 routes + JSON API |
 | `synthetic/` | CAD toolkit, WINCH-100 assembly, bootstrap |
-| `cli.py` | 15 subcommands |
-| `tests/` | 164 tests across 6 files |
+| `cli.py` | 16 subcommands |
+| `tests/` | 178 tests across 7 files |
 
 ---
 
@@ -160,13 +160,17 @@ including the optional Stage Five. 164 tests pass. The full write-up is
 The "Decisions still open" section of the previous revision is resolved. There
 are no known unimplemented features and no known incorrect behaviour. The
 limitations that remain are inherent and are listed in `docs/REPORT.md` §11
-("What is proven, and what is not") rather than here. One wanted *addition* is
-recorded below under "Wanted next"; it is a new feature, not a gap in what the
-design document asked for.
+("What is proven, and what is not") rather than here. The one wanted *addition*
+(the status view) has since been built; see below.
 
 ---
 
-## Wanted next (idea, not built)
+## Built 2026-11-01: the status view (was "Wanted next")
+
+`query/readiness.py`, the `/status` page (and `/api/status`), and
+`interlock status [--team T] [--fast]`. Gaps per part grouped by team and
+designer, waiting items per team, a completeness figure per team. Tested in
+`tests/test_readiness.py`. The original request is kept below for context.
 
 **A single "state of the project" view.** Asked for 2026-09-21. Right now the
 interface answers questions one part at a time: this part's contract, this

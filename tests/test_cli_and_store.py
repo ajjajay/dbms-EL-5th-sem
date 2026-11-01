@@ -41,6 +41,7 @@ def loaded(tmp_path_factory):
     ["interference", "--fast"],
     ["log", "--limit", "5"],
     ["stats"],
+    ["status", "--fast"],
     ["drain"],
     ["ask", "--status"],
     ["ask", "do", "any", "chains", "fail?"],

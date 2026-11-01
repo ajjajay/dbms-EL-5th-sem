@@ -29,6 +29,7 @@ from ..model import export, interference, merkle, tolerance
 from ..model.commit import CommitPipeline
 from ..nl.agent import Agent
 from ..query import traversal as q
+from ..query.readiness import readiness
 
 BASE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
@@ -79,7 +80,7 @@ background:var(--card);color:var(--fg);text-decoration:none;font-size:13.5px;fon
 </style></head><body>
 <header>
 <a class="brand" href="/">Interlock</a>
-<a href="/parts">Parts</a><a href="/commits">Commits</a><a href="/chains">Chains</a>
+<a href="/status">Status</a><a href="/parts">Parts</a><a href="/commits">Commits</a><a href="/chains">Chains</a>
 <a href="/tree">Tree</a><a href="/interference">Interference</a><a href="/ask">Ask</a>
 <span class="root">{{ ref_name }} @ {{ root_hash or 'no ref' }}</span>
 </header><main>
@@ -596,6 +597,40 @@ Fasteners are excluded: a bolt is meant to occupy its hole.</div>
 {% else %}<p class="ok">No interference found.</p>{% endif %}
 {% endblock %}""",
 
+    "status.html": """{% extends "base.html" %}{% block body %}
+<h1>{{ r.root_part }} status
+{% if r.ready %}<span class="pill ok">ready</span>{% endif %}</h1>
+<p class="muted">What is finished, what is outstanding, and whose turn it is. A part is
+finished when it has declared enough to be checked: a reviewed contract, a density, a
+release. Waiting items are things already checked and found wanting.</p>
+<div class="grid">
+<div class="stat"><b>{{ '%.0f'|format(r.complete * 100) }}%</b><span>parts fully declared</span></div>
+<div class="stat"><b>{{ r.parts|length }}</b><span>distinct parts</span></div>
+<div class="stat"><b>{{ r.waiting|length }}</b><span>waiting on a person</span></div>
+<div class="stat"><b>{{ r.teams|length }}</b><span>teams</span></div>
+</div>
+<h2>By team</h2>
+<table><tr><th>Team</th><th>Complete</th><th>Parts</th><th>Waiting</th></tr>
+{% for t in r.teams.values() %}<tr>
+<td><a href="#team-{{ t.team_id }}">{{ t.team_id }}</a></td>
+<td class="mono {{ 'ok' if t.complete == 1 else 'warn' }}">{{ '%.0f'|format(t.complete * 100) }}%</td>
+<td>{{ t.parts|selectattr('done')|list|length }} / {{ t.parts|length }}</td>
+<td class="{{ 'bad' if t.waiting else 'dim' }}">{{ t.waiting|length }}</td></tr>{% endfor %}</table>
+{% for t in r.teams.values() %}
+<h2 id="team-{{ t.team_id }}">{{ t.team_id }}</h2>
+{% if t.waiting %}<table><tr><th>Waiting</th><th>Detail</th></tr>
+{% for w in t.waiting %}<tr><td><span class="pill {{ 'warn' if w.kind == 'clash' else 'bad' }}">{{ w.kind }}</span></td>
+<td>{% if w.link %}<a href="{{ w.link }}">{{ w.detail }}</a>{% else %}{{ w.detail }}{% endif %}</td>
+</tr>{% endfor %}</table>{% endif %}
+{% set queues = t.designers() %}
+{% if queues %}{% for designer, parts in queues.items() %}
+<div class="card"><b>{{ designer }}</b>
+<table>{% for p in parts %}<tr><td style="width:30%"><a href="/part/{{ p.part_number }}">{{ p.part_number }}</a></td>
+<td class="warn">{{ p.gaps|join('; ') }}</td></tr>{% endfor %}</table></div>
+{% endfor %}{% elif t.parts %}<p class="ok">Every part this team owns is fully declared.</p>{% endif %}
+{% endfor %}
+{% endblock %}""",
+
     "ask.html": """{% extends "base.html" %}{% block body %}
 <h1>Ask</h1>
 <p class="muted">{{ status }}</p>
@@ -680,6 +715,25 @@ def create_app(db_path: str | os.PathLike | None = None, ref: str = "main") -> F
                 "SELECT p.part_number FROM revision r JOIN part p ON p.part_id = r.part_id "
                 "WHERE r.revision_id = ?", (root,)),
         )
+
+    @app.get("/status", response_class=HTMLResponse)
+    def status(revision: str | None = None):
+        row = head()
+        if row is None and not revision:
+            return HTMLResponse("<h1>No configuration</h1>")
+        return render("status.html", r=readiness(db, revision or row["revision_id"]))
+
+    @app.get("/api/status")
+    def api_status(revision: str = "main"):
+        r = readiness(db, revision)
+        return JSONResponse({
+            "root": r.root_part, "complete": r.complete, "ready": r.ready,
+            "teams": {t.team_id: {
+                "complete": t.complete,
+                "parts": [vars(p) | {"done": p.done} for p in t.parts],
+                "waiting": [vars(w) for w in t.waiting],
+            } for t in r.teams.values()},
+        })
 
     @app.get("/parts", response_class=HTMLResponse)
     def parts():

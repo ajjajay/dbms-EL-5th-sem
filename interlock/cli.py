@@ -16,6 +16,7 @@
     python -m interlock.cli why COMMIT    a commit's full validation trace
     python -m interlock.cli drain         deliver the outbox to the document store
     python -m interlock.cli stats         row counts and storage
+    python -m interlock.cli status        what is finished, what is outstanding, whose turn
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ from .db.documents import drain as drain_outbox
 from .db.documents import open_document_store, pending_count
 from .model import interference as interf
 from .model import merkle, tolerance
+from .query import readiness as rd
 from .query import traversal as q
 
 DEMO_DIR = Path("data") / "demo"
@@ -264,7 +266,7 @@ def cmd_demo(args) -> int:
     print(f"{s['parts']} parts, {s['revisions']} revisions, {s['shapes']} distinct shapes, "
           f"{s['occurrences']} occurrences, {s['commits']} commits")
     print(f"database {s['db_bytes'] / 1e6:.2f} MB, blobs {s['blob_bytes'] / 1e6:.2f} MB")
-    print(f"\nreview it:  {sys.executable} -m interlock.cli serve --db {args.db}")
+    print(f"\nreview it:  {sys.executable} -m interlock.cli --db {args.db} serve")
     db.close()
     return 0
 
@@ -549,6 +551,29 @@ def cmd_stats(args) -> int:
     return 0
 
 
+def cmd_status(args) -> int:
+    db = _db(args)
+    root = args.revision or _head(db, args.ref)["revision_id"]
+    r = rd.readiness(db, root, with_sockets=not args.fast)
+    if args.team and args.team not in r.teams:
+        sys.exit(f"no parts or waiting items for team {args.team!r} under {r.root_part}")
+    print(f"{r.root_part}: {r.complete:.0%} of {len(r.parts)} distinct parts fully declared, "
+          f"{len(r.waiting)} item(s) waiting on a person"
+          + ("   [ready]" if r.ready else ""))
+    for t in r.teams.values():
+        if args.team and t.team_id != args.team:
+            continue
+        print(f"\n{t.team_id}  {t.complete:.0%} complete  "
+              f"({sum(p.done for p in t.parts)}/{len(t.parts)} parts, {len(t.waiting)} waiting)")
+        for designer, parts in t.designers().items():
+            print(f"  {designer}")
+            for p in parts:
+                print(f"    {p.part_number:<22}{'; '.join(p.gaps)}")
+        for w in t.waiting:
+            print(f"  {w.kind:<13}{w.detail[:150]}")
+    return 0
+
+
 def cmd_serve(args) -> int:
     import uvicorn
 
@@ -658,6 +683,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     st = sub.add_parser("stats", help="row counts and storage")
     st.set_defaults(func=cmd_stats)
+
+    ss = sub.add_parser("status", help="what is finished, what is outstanding, whose turn")
+    ss.add_argument("revision", nargs="?")
+    ss.add_argument("--team", help="only this team's queue")
+    ss.add_argument("--fast", action="store_true", help="skip re-running the socket checks")
+    ss.set_defaults(func=cmd_status)
 
     s = sub.add_parser("serve", help="the review interface")
     s.add_argument("--host", default="127.0.0.1")

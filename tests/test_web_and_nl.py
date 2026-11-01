@@ -42,7 +42,7 @@ def client(loaded):
 
 
 @pytest.mark.parametrize("path", [
-    "/", "/parts", "/commits", "/chains", "/tree", "/interference", "/ask",
+    "/", "/status", "/api/status", "/parts", "/commits", "/chains", "/tree", "/interference", "/ask",
     "/healthz", "/api/bom", "/api/chains", "/api/where-used/BOLT-M6X20",
     "/part/BASE-PLATE", "/part/WINCH-100", "/part/BEARING-BLOCK",
 ])
