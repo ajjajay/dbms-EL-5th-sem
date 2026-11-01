@@ -1,0 +1,19 @@
+# documentation branch: documents only.
+# Everything is ignored except the paths listed below, so the code, the venv
+# and the database (which stay on disk from the tryone branch) can never be
+# committed here.
+/*
+!/.gitignore
+!/README.md
+!/*.docx
+!/*.odt
+!/*.pdf
+!/submission/
+!/old_drafts/
+!/docs/
+/docs/*
+!/docs/lab/
+
+# Office lock files
+.~lock.*
+~$*

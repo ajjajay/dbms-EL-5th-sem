@@ -1,0 +1,157 @@
+INTERLOCK: THE DATA FLOW DIAGRAMS IN SIMPLE WORDS
+(goes with DFD_Level0_Context.png, DFD_Level1.png, DFD_Level2_Validate_Change.png)
+
+======================================================================
+1. WHAT A DFD IS (and how it differs from the ER diagram)
+======================================================================
+The ER diagram shows WHAT is stored. A DFD (Data Flow Diagram) shows how
+data MOVES: where it comes from, what processes it, where it is kept,
+and where results go.
+
+A DFD has no loops, decisions or timing. It is not a flowchart: it shows
+the data, not the order of steps.
+
+DFDs are drawn in levels, zooming in each time:
+  Level 0  (context diagram)  the whole system as ONE process, plus the
+                              outside world it talks to
+  Level 1                     that one process split into its main
+                              processes, with the data stores
+  Level 2                     one Level-1 process split further
+
+======================================================================
+2. THE SYMBOLS (Yourdon / DeMarco notation, the same in all three)
+======================================================================
+  Circle              Process: something that transforms data.
+                      Numbered (1.0, 2.0 ... and 2.1, 2.2 ... inside 2.0).
+                      Named as verb + object ("Validate change").
+  Rectangle           External entity: a person or system OUTSIDE ours
+                      that sends or receives data.
+  Two parallel lines  Data store: data at rest (our tables), numbered D1-D8.
+  Arrow with a label  Data flow: data moving. The label names the data,
+                      not an action.
+
+Rules followed:
+  - data never moves directly between two external entities or two
+    stores; it always passes through a process
+  - every process has at least one input and one output
+  - BALANCING: the flows to and from external entities are the SAME at
+    every level. Level 0 shows "change request" from the Design Engineer,
+    so Level 1 and Level 2 show it too, now entering a specific process.
+
+======================================================================
+3. LEVEL 0: CONTEXT DIAGRAM
+======================================================================
+One process, "0 Interlock Parts and Change Control System", and four
+external entities:
+
+  Design Engineer   sends change requests (part + contract declaration),
+                    queries and export requests; receives the verdict
+                    (landed or rejected, with the reason) and reports
+  CAD Tool          sends STEP geometry (the 3D model file); receives
+  (FreeCAD)         exported STEP assemblies to open
+  Affected Team     receives a notification when someone else's change
+                    breaks something they depend on; sends back an
+                    acknowledgement
+  Language Model    for plain-English questions: receives the question
+  Service           and the list of tools; sends back which tool to call
+                    and the answer text
+
+======================================================================
+4. LEVEL 1: THE SIX MAIN PROCESSES
+======================================================================
+ 1.0 Ingest geometry
+     Reads the STEP file, computes the geometric fingerprint and finds
+     holes and faces. Checks D1 for a shape it already knows (the same
+     shape is stored only once). Passes the analysis to 2.0.
+
+ 2.0 Validate and land change   (the heart of the system; see Level 2)
+     Takes the change request + geometry analysis, checks it against
+     contracts (D3), the current configuration (D2), shapes (D1) and
+     tolerance chains (D4). Either lands it whole or rejects it whole.
+     Records the commit and every check in D5, writes events to D7,
+     sends breaking changes to 3.0 and the verdict to the engineer.
+
+ 3.0 Notify affected teams
+     Looks up who subscribed to the changed part (D6), stores a
+     notification, tells the team, and records their acknowledgement.
+
+ 4.0 Sync document store
+     Takes pending events from the Outbox (D7), writes them as JSON
+     documents to the NoSQL store (D8), and marks them delivered. This
+     happens only AFTER the SQL commit, so a rejected change never leaves
+     a stray document.
+
+ 5.0 Answer queries and reports
+     Bill of materials, where-used, impact, tolerance chains, project
+     status, interference, history. Reads D1-D6 and D8. For plain-English
+     questions it asks the Language Model which read-only tool to use.
+
+ 6.0 Export geometry
+     Rebuilds a part or assembly as a STEP file from stored geometry (D1)
+     and structure (D2), and sends it to the CAD tool.
+
+The data stores (each is a group of tables from the ER diagram):
+  D1 Geometry                  shape, shape_alias, feature (+ geometry files)
+  D2 Parts and assemblies      team, part, revision, occurrence, ref
+  D3 Contracts                 contract, interface, socket
+  D4 Tolerances                dimension, chain, chain_member
+  D5 Commit history            commit_log, validation, change_classification
+  D6 Subscriptions and
+     notifications             subscription, notification
+  D7 Outbox                    outbox
+  D8 Document store (NoSQL)    validation traces, notification detail,
+                               question log (TinyDB JSON)
+  (interference results belong with D2's configuration and are written by
+   5.0 when a clash check is run)
+
+======================================================================
+5. LEVEL 2: INSIDE 2.0 VALIDATE AND LAND CHANGE
+======================================================================
+The checks run cheapest first, so a doomed change is rejected before the
+expensive checks run. Each passes its result to the next; any failure
+goes straight to 2.7.
+
+ 2.1 Check concurrency
+     Was the change written against the CURRENT version of the assembly?
+     Compares the request's base root hash with the one in D2. If someone
+     else landed a change first: "failed check" (prevents lost updates).
+ 2.2 Check declaration, write proposed state
+     Every change must declare its contract (or inherit the previous one
+     from D3). Writes the new revisions into D2 INSIDE a transaction, so
+     the remaining checks test exactly what would land.
+ 2.3 Classify change
+     Compares the new contract hash with the old one (D3): no_op,
+     internal (nothing others depend on changed) or breaking. This only
+     labels the change; it cannot fail.
+ 2.4 Check envelope and budgets
+     Does the part still fit its size envelope and stay under its mass
+     limit? Uses volume and bounding box (D1) and limits (D3).
+ 2.5 Match sockets to interfaces
+     Do the bolt holes still line up with what the parent assembly
+     expects? Uses hole features (D1), interfaces and sockets (D3) and
+     placements (D2). This is the check that catches a moved hole.
+ 2.6 Re-total tolerance chains
+     Adds up every affected tolerance chain (D4) and checks it against
+     its limits.
+ 2.7 Land or roll back
+     All passed: swap the ref in D2 to the new root (the change "lands"),
+     send breaking changes to 3.0.
+     Any failed: roll back everything 2.2 wrote.
+     Either way: record the commit and every check in D5, put a trace
+     event in D7, and return the verdict and reason to the engineer.
+
+======================================================================
+6. VIVA POINTS
+======================================================================
+- Why levels? Each level adds detail without losing the big picture.
+  Level 0 is the scope, Level 1 the modules, Level 2 the detailed logic
+  of the most important module.
+- Balancing: show that "change request" and "verdict and reason" appear
+  at Levels 0, 1 and 2, with the same external entity.
+- Numbering: 2.1 to 2.7 are the children of process 2.0.
+- Why the outbox (D7) sits between SQL and NoSQL: two databases can't
+  share one transaction, so documents are written only after the SQL
+  commit succeeds.
+- A data store connects only to processes, never directly to an
+  external entity: the engineer never touches a table directly; every
+  read and write goes through a process.

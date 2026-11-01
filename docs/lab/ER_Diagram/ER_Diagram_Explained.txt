@@ -1,0 +1,181 @@
+INTERLOCK: THE ER DIAGRAM IN SIMPLE WORDS
+(goes with Interlock_ER_Diagram.png)
+
+======================================================================
+1. WHAT AN ER DIAGRAM IS
+======================================================================
+An ER (Entity-Relationship) diagram is a picture of what the database stores
+and how those things are connected, drawn BEFORE making any tables.
+
+  ENTITY        a "thing" we store facts about (a team, a part, a commit)
+  ATTRIBUTE     a fact about that thing (a team's name, a part's number)
+  RELATIONSHIP  how two things are connected (a team OWNS a part)
+
+We use Chen notation, the standard textbook style.
+
+======================================================================
+2. THE SYMBOLS (only these are used)
+======================================================================
+  Rectangle           Entity, e.g. TEAM
+  Double rectangle    Weak entity: cannot be identified on its own,
+                      only through its owner (e.g. INTERFACE)
+  Diamond             Relationship, e.g. OWNS
+  Double diamond      Identifying relationship: the one that links a weak
+                      entity to the owner it depends on
+  Ellipse (oval)      Attribute
+  Underlined name     Key attribute: unique, picks out exactly one row
+  Dashed underline    Partial key: unique only inside its owner
+  Double line         Total participation: EVERY row of that entity must
+                      take part (every part MUST have an owning team)
+  Single line         Partial participation: taking part is optional
+  1 / N / M / P       Cardinality: how many on each side
+                      1:N = one-to-many, M:N = many-to-many,
+                      M:N:P = three-way (ternary)
+
+How to read a line: "TEAM --1-- OWNS ==N== PART" means
+one team owns many parts, and every part must be owned (double line).
+
+======================================================================
+3. THE ENTITIES (16)
+======================================================================
+TEAM          A group of engineers (chassis, drivetrain, standards,
+              controls). Key: team_id.
+PART          Something with a part number, e.g. BOLT-M6X20.
+              Key: part_id. Owned by one team.
+REVISION      One frozen version of a part. A change never edits a
+              revision, it makes a new one. Key: revision_id.
+SHAPE         One distinct piece of geometry, identified by its
+              geometric "fingerprint". Many revisions can share it.
+SHAPE_ALIAS   Another fingerprint that turned out to be the same shape
+              (e.g. the same part exported by a different CAD tool).
+FEATURE       A hole, flat face, boss or cone found on a shape.
+COMMIT_LOG    One attempted change, with its verdict (landed/rejected)
+              and the reason. Never deleted.
+VALIDATION    One check that ran on a commit, and whether it passed.
+CONTRACT      What a revision promises other teams: size envelope,
+              maximum mass, hash of the promise.
+INTERFACE     (weak) A mounting point a revision OFFERS, e.g. a bolt
+              hole pattern. Identified by its revision + its name.
+SOCKET        (weak) A mounting point an assembly REQUIRES something
+              to fill. Identified by its revision + its name.
+DIMENSION     (weak) A toleranced measurement on a revision
+              (nominal +/- tolerance). Identified by revision + name.
+CHAIN         A tolerance stack-up: several dimensions added together
+              to check that a gap stays within limits.
+REF           A named pointer ("main") to the current top assembly.
+INTERFERENCE  A recorded clash between two placed parts (advice only).
+OUTBOX        A queue of events waiting to be copied into the NoSQL
+              document store. Connected to nothing on purpose: it is a
+              delivery queue, not part of the data model.
+
+======================================================================
+4. THE RELATIONSHIPS (20)
+======================================================================
+ Relationship    Between                       Card.  Meaning
+ --------------  ----------------------------  -----  --------------------------------
+ OWNS            TEAM - PART                   1:N    a team owns many parts; every
+                                                      part has an owner (total)
+ HAS_REVISION    PART - REVISION               1:N    a part has many versions; every
+                                                      revision belongs to a part
+ INTRODUCES      COMMIT_LOG - REVISION         1:N    each revision was created by
+                                                      exactly one commit
+ HAS_SHAPE       SHAPE - REVISION              1:N    many revisions can share one
+                                                      shape; pure assemblies have none
+ CONTAINS        REVISION - REVISION           M:N    an assembly contains parts,
+                                                      which may be assemblies too
+                                                      (RECURSIVE: roles parent/child)
+ HAS_CONTRACT    REVISION - CONTRACT           1:1    a revision has at most one
+                                                      contract
+ OFFERS          REVISION - INTERFACE          1:N    identifying (weak entity)
+ REQUIRES        REVISION - SOCKET             1:N    identifying (weak entity)
+ SPECIFIES       REVISION - DIMENSION          1:N    identifying (weak entity)
+ INCLUDES        CHAIN - DIMENSION             M:N    a chain adds up many dimensions;
+                                                      a dimension can be in many chains
+ OWNS_CHAIN      TEAM - CHAIN                  1:N    optional owner of a chain
+ SUBMITS         TEAM - COMMIT_LOG             1:N    a team makes many commits
+ RECORDS         COMMIT_LOG - VALIDATION       1:N    one commit, many checks
+ CLASSIFIES      COMMIT_LOG - PART             M:N    how disruptive a commit was for
+                                                      each part it touched
+ NOTIFIES        COMMIT_LOG - TEAM - PART      M:N:P  three-way: "this commit changed
+                                                      this part, tell this team"
+ SUBSCRIBES_TO   TEAM - PART                   M:N    a team says "I depend on this
+                                                      part, warn me if it changes"
+ ALIAS_OF        SHAPE - SHAPE_ALIAS           1:N
+ HAS_FEATURE     SHAPE - FEATURE               1:N
+ POINTS_TO       REVISION - REF                1:N    "main" points at one revision
+ CHECKED_IN      REVISION - INTERFERENCE       1:N    clashes found in an assembly
+
+Relationships can have their own attributes, drawn as ovals on the diamond:
+  CONTAINS       quantity, instance_name, transform (position + rotation)
+  INCLUDES       seq (order in the chain), direction (+ or -)
+  NOTIFIES       reason, acknowledged
+  CLASSIFIES     classification (no_op / internal / breaking)
+  SUBSCRIBES_TO  interface_name
+
+======================================================================
+5. THE KEY IDEAS TO SAY IN THE VIVA
+======================================================================
+(a) Four separate things: PART, REVISION, SHAPE, and the CONTAINS link.
+    Each one answers a different question:
+      PART      WHO is it?           (part number, owner)
+      REVISION  WHICH version?
+      SHAPE     WHAT geometry?
+      CONTAINS  WHERE, and HOW MANY? (position + quantity)
+    So 27 identical bolts = 1 part, 1 revision, 1 shape, 27 placements.
+    PLATE-A and PLATE-B have the same shape but are still two parts.
+
+(b) Why quantity and position sit on CONTAINS, not on PART:
+    the same bolt is used in many places, each with its own position.
+    The fact belongs to the CONNECTION, not to the bolt.
+
+(c) Recursive relationship: CONTAINS joins REVISION to REVISION.
+    The roles "parent" and "child" say which end is which. This is how
+    an assembly holds sub-assemblies to any depth.
+
+(d) Weak entities: an interface called "foot" only makes sense on a
+    particular revision. Its name is a partial key (dashed underline),
+    unique only within that revision. Hence the double rectangle and the
+    double diamond.
+
+(e) Ternary relationship: NOTIFIES needs all three of commit, team and
+    part at once. Splitting it into two-way links would lose which team
+    was told about which part for which commit.
+
+(f) Total vs partial: double line = must take part. Every revision MUST
+    belong to a part and come from a commit. But a commit doesn't have to
+    name a team, and a revision doesn't need a shape (an assembly has no
+    geometry of its own), so those lines are single.
+
+======================================================================
+6. FROM THE DIAGRAM TO TABLES (relational schema)
+======================================================================
+Standard mapping rules, all applied:
+  1. Each entity becomes a table; its key becomes the PRIMARY KEY.
+  2. Weak entity: a table holding the owner's key as a FOREIGN KEY, with
+     (owner key + partial key) UNIQUE. INTERFACE gets
+     UNIQUE(revision_id, name).
+  3. 1:N: put the "1" side's key as a foreign key on the "N" side.
+     e.g. OWNS becomes part.team_id.
+  4. 1:1: foreign key on the total side, marked UNIQUE.
+     e.g. HAS_CONTRACT becomes contract.revision_id UNIQUE.
+  5. M:N: becomes its own table holding both keys.
+     CONTAINS -> occurrence(parent_rev, child_rev, quantity, ...)
+     INCLUDES -> chain_member(chain_id, seq, dimension_id, direction)
+     CLASSIFIES -> change_classification(commit_id, part_id, ...)
+     SUBSCRIBES_TO -> subscription(team_id, part_id, interface_name)
+  6. Ternary: its own table with three foreign keys.
+     NOTIFIES -> notification(commit_id, team_id, part_id, ...)
+
+Result: 16 entity tables + 5 relationship tables = 21 tables, matching
+schema.sql exactly.
+
+One detail worth knowing: occurrence has its own id (occurrence_id)
+rather than using (parent_rev, child_rev) as its key, because the SAME
+child can sit in the SAME parent twice at different positions
+(two identical brackets, left and right).
+
+Some rules can't be drawn on an ER diagram, so the database enforces them
+with triggers:
+  - an assembly may never contain itself, at any depth
+  - revisions and placements can't be edited, only replaced
+  - the commit log can't be deleted from
